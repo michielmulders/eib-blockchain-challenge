@@ -9,8 +9,7 @@ import AuthPrivateRoute from '../components/Auth/PrivateRoute';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import BiddingMarket from './investor/BiddingMarket';
-import InvoiceOverview from './CreateInvoice/Create';
-import Invoice from './Invoice/Invoice';
+import CommercialPaper from './CommercialPaper/CommercialPaper';
 import InvestmentOverview from './investor/InvestmentOverview';
 
 const { Content } = Layout;
@@ -57,13 +56,8 @@ class Root extends React.Component {
                     <AuthPrivateRoute exact path="/" component={Home} />
                     <AuthPrivateRoute
                         exact
-                        path="/create-invoice"
-                        component={InvoiceOverview}
-                    />
-                    <AuthPrivateRoute
-                        exact
-                        path="/invoice/:id"
-                        component={Invoice}
+                        path="/commercialpapers/:id"
+                        component={CommercialPaper}
                     />
                 </Switch>
             );

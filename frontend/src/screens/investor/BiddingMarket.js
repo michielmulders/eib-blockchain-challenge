@@ -12,7 +12,6 @@ import {
     Tag
 } from 'antd';
 import './BiddingMarket.module.less';
-import FinanceRequestService from '../../shared/services/api/financeRequest';
 import { connect } from 'react-redux';
 
 class ScreensInvestorBiddingMarket extends React.Component {
@@ -23,11 +22,7 @@ class ScreensInvestorBiddingMarket extends React.Component {
     };
 
     componentDidMount() {
-        FinanceRequestService.getFinanceRequests().then(financeRequests => {
-            this.setState({
-                financeRequests
-            });
-        });
+
     }
 
     render() {
@@ -129,44 +124,6 @@ class ScreensInvestorBiddingMarket extends React.Component {
                                                 );
                                                 // Dismiss manually and asynchronously
 
-                                                FinanceRequestService.bidOnFinanceRequest(
-                                                    this.state.invoiceRequest
-                                                        .financeRequestId,
-                                                    this.state.bidAmount
-                                                ).then(({ txHash }) => {
-                                                    this.setState({
-                                                        financeRequests: [
-                                                            ...this.state.financeRequests.map(
-                                                                item => {
-                                                                    if (
-                                                                        item.financeRequestId ===
-                                                                        this
-                                                                            .state
-                                                                            .invoiceRequest
-                                                                            .financeRequestId
-                                                                    ) {
-                                                                        item.bids = [
-                                                                            {
-                                                                                amount: this
-                                                                                    .state
-                                                                                    .bidAmount
-                                                                            },
-                                                                            ...item.bids
-                                                                        ];
-                                                                    }
-                                                                    return item;
-                                                                }
-                                                            )
-                                                        ]
-                                                    });
-
-                                                    hide();
-
-                                                    message.success(
-                                                        'Succesful bid: ' +
-                                                            txHash
-                                                    );
-                                                });
                                             }}>
                                             Place bid
                                         </Button>

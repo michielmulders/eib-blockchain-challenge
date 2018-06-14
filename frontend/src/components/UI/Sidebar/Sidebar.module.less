@@ -1,18 +1,24 @@
 .sidebar_logo {
 
-  height: 64px;
+  height: 100px;
   position: relative;
-  line-height: 64px;
+  line-height: 100px;
   padding-left: 24px;
+  padding-right: 30px;
   -webkit-transition: all .3s;
   transition: all .3s;
   overflow: hidden;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   img {
     display: inline-block;
     vertical-align: middle;
-    height: 32px;
+    height: 40px;
   }
+
   h1 {
     color: #070707;
     display: inline-block;
@@ -21,8 +27,8 @@
     margin: 0 0 0 12px;
     font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 600;
-
   }
+
 }
 
 .menu {
@@ -46,8 +52,8 @@
   background: white;
   &:global(.ant-layout-sider-collapsed) {
     .sidebar_logo {
-      line-height: 64px;
-      height: 64px;
+      line-height: 128px;
+      height: 128px;
       padding-left: 14px;
 
       h1 {

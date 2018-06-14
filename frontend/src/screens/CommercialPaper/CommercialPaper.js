@@ -14,57 +14,29 @@ import {
     Tag,
     Timeline
 } from 'antd';
-import InvoiceService from '../../shared/services/api/invoice';
-import FinanceRequestService from '../../shared/services/api/financeRequest';
+import commercialPaperService from '../../shared/services/api/commercialPaper';
 import { message } from 'antd/lib/index';
 import moment from 'moment';
 import { push } from 'react-router-redux';
 
-class Invoice extends React.Component {
+class CommercialPaper extends React.Component {
     state = {
-        seller: false,
-        invoice: {
-            bank: 'Swift',
-            buyer: 'auth0-5aeccc1e9208b8058a4aa598',
-            countryOfOrigin: 'Hawaii',
-            dateOfSale: '1525526543',
-            docType: 'invoice',
-            dueDate: '1525546543',
-            exchangeRate: 'aRate',
-            financeable: true,
-            insurance: 'Insurer',
-            invoiceId: 'IN1',
-            invoiceLines: [
-                {
-                    carats: '0.5',
-                    description: 'polished',
-                    eurForCarats: '1400',
-                    everledgerId: '3138724629',
-                    totalEur: '700'
-                },
-                {
-                    carats: '0.5',
-                    description: 'polished',
-                    eurForCarats: '1200',
-                    everledgerId: '2448402482',
-                    totalEur: '600'
-                }
-            ],
-            otherExpenses: 'test',
-            seller: 'auth0-5aeccbeb17688b753df85ba9',
-            shipper: 'G4S',
-            status: 'PENDING'
+        cp: {
+            docType: 'cp',
+            issuer: "",
+            guarantor: "",
+            type: "",
+            dealer: "",
+            issueDate: "",
+            maturityDate: "",
+            discount: "",
+            delivery: "",
+            amount: "",
+            rating: "",
+            buyerId: "",
+            status: "",
+            isin: ""
         },
-        invoiceRequest: null,
-        bidaccepted: false,
-
-        history: [
-            {
-                value: 'PENDING',
-
-                timestamp: 1525592055000
-            }
-        ],
         columns: [
             {
                 title: 'carats',
@@ -103,10 +75,10 @@ class Invoice extends React.Component {
     }
 
     componentDidMount() {
-        InvoiceService.getInvoice(this.props.match.params.id).then(invoice => {
-            const ifSeller = this.props.userId === invoice.seller;
+        commercialPaperService.getcommercialPaper(this.props.match.params.id).then(commercialPaper => {
+            const ifSeller = this.props.userId === commercialPaper.seller;
 
-            InvoiceService.getInvoiceHistory(this.props.match.params.id)
+            commercialPaperService.getcommercialPaperHistory(this.props.match.params.id)
                 .then(history => {
                     return history.map(i => ({
                         value: i.value.status,
@@ -124,26 +96,26 @@ class Invoice extends React.Component {
             });
 
             if (ifSeller) {
-                InvoiceService.getInvoiceRequest(
+                commercialPaperService.getcommercialPaperRequest(
                     this.props.match.params.id
-                ).then(invoiceRequest => {
-                    console.log(invoiceRequest[0]);
+                ).then(commercialPaperRequest => {
+                    console.log(commercialPaperRequest[0]);
 
                     const bidaccepted =
-                        invoiceRequest.length &&
-                        invoiceRequest[0].bids.find(
+                        commercialPaperRequest.length &&
+                        commercialPaperRequest[0].bids.find(
                             bid => bid.status === 'ACCEPTED'
                         );
 
                     this.setState({
-                        invoice,
-                        invoiceRequest: invoiceRequest[0],
+                        commercialPaper,
+                        commercialPaperRequest: commercialPaperRequest[0],
                         bidaccepted
                     });
                 });
             } else {
                 this.setState({
-                    invoice
+                    commercialPaper
                 });
             }
         });
@@ -198,12 +170,12 @@ class Invoice extends React.Component {
     renderTag = () => {
         if (!this.state.bidaccepted && this.state.seller) {
             if (
-                this.state.invoiceRequest &&
-                this.state.invoiceRequest.bids.length
+                this.state.commercialPaperRequest &&
+                this.state.commercialPaperRequest.bids.length
             ) {
                 return (
                     <Tag color="red">
-                        {this.state.invoiceRequest.bids.length}
+                        {this.state.commercialPaperRequest.bids.length}
                     </Tag>
                 );
             }
@@ -215,8 +187,8 @@ class Invoice extends React.Component {
     };
 
     render() {
-        const total = this.state.invoice
-            ? this.state.invoice.invoiceLines.reduce((all, obj) => {
+        const total = this.state.commercialPaper
+            ? this.state.commercialPaper.commercialPaperLines.reduce((all, obj) => {
                   return all + Number.parseFloat(obj.totalEur);
               }, 0)
             : 0;
@@ -261,10 +233,10 @@ class Invoice extends React.Component {
                                             fontFamily: 'lato',
                                             fontWeight: 700
                                         }}>
-                                        Invoice{' '}
+                                        commercialPaper{' '}
                                         <Tag>
-                                            {this.state.invoice
-                                                ? this.state.invoice.status
+                                            {this.state.commercialPaper
+                                                ? this.state.commercialPaper.status
                                                 : ''}
                                         </Tag>
                                     </h1>
@@ -291,7 +263,7 @@ class Invoice extends React.Component {
                         </div>
                         <Card bodyStyle={{ padding: '10px 25px 25px' }}>
                             <Tabs defaultActiveKey="1">
-                                <Tabs.TabPane tab="Invoice details" key="1">
+                                <Tabs.TabPane tab="commercialPaper details" key="1">
                                     <div
                                         style={{
                                             width: '100%',
@@ -360,13 +332,13 @@ class Invoice extends React.Component {
                                         </div>
                                     </div>
 
-                                    {this.state.invoice && (
+                                    {this.state.commercialPaper && (
                                         <Table
                                             style={{
                                                 backgroundColor: '#fff'
                                             }}
                                             dataSource={
-                                                this.state.invoice.invoiceLines
+                                                this.state.commercialPaper.commercialPaperLines
                                             }
                                             columns={this.state.columns}
                                         />
@@ -384,11 +356,11 @@ class Invoice extends React.Component {
                                         </div>
                                     }
                                     key="2">
-                                    {this.state.invoiceRequest ? (
+                                    {this.state.commercialPaperRequest ? (
                                         <List
                                             itemLayout="horizontal"
                                             dataSource={
-                                                this.state.invoiceRequest.bids
+                                                this.state.commercialPaperRequest.bids
                                             }
                                             renderItem={item => (
                                                 <List.Item>
@@ -408,31 +380,6 @@ class Invoice extends React.Component {
                                                                     'Comitting to the blockchain..',
                                                                     0
                                                                 );
-
-                                                                FinanceRequestService.acceptBid(
-                                                                    this.state
-                                                                        .invoiceRequest
-                                                                        .financeRequestId,
-                                                                    'ACCEPTED',
-                                                                    item.bidId
-                                                                ).then(() => {
-                                                                    hide();
-
-                                                                    message.success(
-                                                                        'Succesfully accepted bid!'
-                                                                    );
-
-                                                                    setTimeout(
-                                                                        () => {
-                                                                            this.props.push(
-                                                                                this
-                                                                                    .props
-                                                                                    .match
-                                                                            );
-                                                                        },
-                                                                        1000
-                                                                    );
-                                                                });
                                                             }}>
                                                             Accept
                                                         </Button>
@@ -490,8 +437,8 @@ class Invoice extends React.Component {
                                 );
                             })}
 
-                            {this.state.invoice &&
-                                this.state.invoice.status === 'PENDING' &&
+                            {this.state.commercialPaper &&
+                                this.state.commercialPaper.status === 'PENDING' &&
                                 !this.state.seller && (
                                     <Button
                                         type="primary"
@@ -502,8 +449,8 @@ class Invoice extends React.Component {
                                                 0
                                             );
 
-                                            InvoiceService.updateInvoiceStatus(
-                                                this.state.invoice.invoiceId,
+                                            commercialPaperService.updatecommercialPaperStatus(
+                                                this.state.commercialPaper.commercialPaperId,
                                                 'SIGNED'
                                             )
                                                 .then(() => {
@@ -512,19 +459,19 @@ class Invoice extends React.Component {
                                                         'Succesfully updated status!'
                                                     );
                                                     setTimeout(() => {
-                                                        return InvoiceService.updateInvoiceStatus(
-                                                            this.state.invoice
-                                                                .invoiceId,
+                                                        return commercialPaperService.updatecommercialPaperStatus(
+                                                            this.state.commercialPaper
+                                                                .commercialPaperId,
                                                             'SHIPPED'
                                                         ).then(() => {
                                                             message.success(
                                                                 'Succesfully received by shipping company!'
                                                             );
                                                             setTimeout(() => {
-                                                                return InvoiceService.updateInvoiceStatus(
+                                                                return commercialPaperService.updatecommercialPaperStatus(
                                                                     this.state
-                                                                        .invoice
-                                                                        .invoiceId,
+                                                                        .commercialPaper
+                                                                        .commercialPaperId,
                                                                     'VALIDATED'
                                                                 ).then(() => {
                                                                     message.success(
@@ -551,8 +498,8 @@ class Invoice extends React.Component {
                                     </Button>
                                 )}
 
-                            {this.state.invoice &&
-                                this.state.invoice.status === 'VALIDATED' &&
+                            {this.state.commercialPaper &&
+                                this.state.commercialPaper.status === 'VALIDATED' &&
                                 !this.state.seller && (
                                     <Button
                                         type="primary"
@@ -563,14 +510,14 @@ class Invoice extends React.Component {
                                                 0
                                             );
 
-                                            InvoiceService.updateInvoiceStatus(
-                                                this.state.invoice.invoiceId,
+                                            commercialPaperService.updatecommercialPaperStatus(
+                                                this.state.commercialPaper.commercialPaperId,
                                                 'PAYED'
                                             )
                                                 .then(() => {
                                                     hide();
                                                     message.success(
-                                                        'Invoice payed!'
+                                                        'commercialPaper payed!'
                                                     );
                                                 })
                                                 .catch(console.log);
@@ -590,4 +537,4 @@ const mapStateToProps = state => ({
     userId: state.auth.user.sub.replace('|', '-')
 });
 
-export default connect(mapStateToProps, { push: push })(Invoice);
+export default connect(mapStateToProps, { push: push })(CommercialPaper);

@@ -4,7 +4,7 @@ import { Avatar, Dropdown, Icon, Layout } from 'antd';
 import styles from './Header.module.less';
 import UIHeaderMenu from './Menu/Menu';
 import Link from 'react-router-dom/es/Link';
-import logo from '../../../assets/images/logo_theledger_black.svg';
+import logo from '../../../assets/images/logo.png';
 
 const { Header } = Layout;
 

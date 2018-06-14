@@ -2,24 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, List, Tag } from 'antd';
 import { Link } from 'react-router-dom';
-import InvoiceService from '../../shared/services/api/invoice';
+import commercialPaperService from '../../shared/services/api/commercialPaper';
 import { message } from 'antd/lib/index';
 import moment from 'moment';
 import { push } from 'react-router-redux';
 
 class ScreensHomeDashboard extends React.Component {
     state = {
-        myInvoices: [],
-        buyInvoices: []
+        myCommercialPapers: [],
+        availableCommercialPapers: []
     };
 
     componentDidMount() {
         const userId = this.props.user.sub.replace('|', '-');
 
-        InvoiceService.getInvoices().then(invoices => {
+        commercialPaperService.getcommercialPapers().then(invoices => {
             this.setState({
-                myInvoices: invoices.filter(i => i.seller === userId),
-                buyInvoices: invoices.filter(i => i.buyer === userId)
+                myCommercialPapers: invoices.filter(i => i.seller === userId),
+                availableCommercialPapers: invoices.filter(i => i.buyer === userId)
             });
         });
     }
@@ -62,7 +62,7 @@ class ScreensHomeDashboard extends React.Component {
                             0
                         );
 
-                        InvoiceService.updateInvoiceStatus(
+                        commercialPaperService.updateInvoiceStatus(
                             item.invoiceId,
                             'SIGNED'
                         )
@@ -70,7 +70,7 @@ class ScreensHomeDashboard extends React.Component {
                                 hide();
                                 message.success('Succesfully updated status!');
                                 setTimeout(() => {
-                                    return InvoiceService.updateInvoiceStatus(
+                                    return commercialPaperService.updateInvoiceStatus(
                                         item.invoiceId,
                                         'SHIPPED'
                                     ).then(() => {
@@ -78,7 +78,7 @@ class ScreensHomeDashboard extends React.Component {
                                             'Succesfully received by shipping company!'
                                         );
                                         setTimeout(() => {
-                                            return InvoiceService.updateInvoiceStatus(
+                                            return commercialPaperService.updateInvoiceStatus(
                                                 item.invoiceId,
                                                 'VALIDATED'
                                             ).then(() => {
@@ -130,50 +130,9 @@ class ScreensHomeDashboard extends React.Component {
                 style={{
                     padding: 50
                 }}>
-                {/*                <Row gutter={24}>
-                    <Col span={12}>
-                        <ChartCard bordered={false}
-                            title="Balance invested"
-                            total="78%"
-                            footer={
-                                <div>
-                                    <span>
-                                        Last month
-                                        <Trend
-                                            flag="up"
-                                            style={{
-                                                marginLeft: 8,
-                                                color: 'rgba(0,0,0,.85)'
-                                            }}>
-                                            12%
-                                        </Trend>
-                                    </span>
-                                    <span style={{ marginLeft: 16 }}>
-                                        日环比
-                                        <Trend
-                                            flag="down"
-                                            style={{
-                                                marginLeft: 8,
-                                                color: 'rgba(0,0,0,.85)'
-                                            }}>
-                                            11%
-                                        </Trend>
-                                    </span>
-                                </div>
-                            }
-                            contentHeight={46}>
-                            <MiniProgress percent={78} strokeWidth={8} />
-                        </ChartCard>
-                    </Col>
-                    <Col span={12} />
-                </Row>*/}
                 <Card
-                    title="My Invoices"
-                    extra={
-                        <Link to="/create-invoice">
-                            <Button type="primary">Create</Button>
-                        </Link>
-                    }
+                    title="My Commercial papers"
+
                     bordered={false}
                     style={{
                         position: 'relative',
@@ -189,7 +148,7 @@ class ScreensHomeDashboard extends React.Component {
                     />
                 </Card>
                 <Card
-                    title="Incoming Invoices"
+                    title="Available Papers"
                     bordered={false}
                     style={{
                         position: 'relative',
