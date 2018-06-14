@@ -100,14 +100,14 @@ export class MyChaincode extends Chaincode {
 
     async queryAllOpenCPs(stubHelper: StubHelper, args: string[]): Promise<any> {
         
-                return await stubHelper.getQueryResultAsList({
-                    selector: {
-                        docType: 'cp',
-                        isin: '0'
-                    }
-                });
-        
+        return await stubHelper.getQueryResultAsList({
+            selector: {
+                docType: 'cp',
+                isin: '0'
             }
+        });
+
+    }
 
     /* async changeCarOwner(stubHelper: StubHelper, args: string[]) {
 
