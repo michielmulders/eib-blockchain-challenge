@@ -72,16 +72,7 @@ export class Loggers {
             json: false,
             label: 'Chain',
             colorize: true,
-        }),
-            new transports.DailyRotateFile({
-                level: 'info',
-                filename: '/var/log/chain-service/chain-service.log',
-                datePattern: 'yyyy-MM-dd.',
-                prepend: true,
-                json: false,
-                handleExceptions: true,
-                maxFiles: 10
-            })],
+        })],
         exitOnError: false,
     });
 }
