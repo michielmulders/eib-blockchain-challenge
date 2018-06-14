@@ -1,0 +1,81 @@
+@import "../../../node_modules/antd/lib/style/themes/default.less";
+@import "../../../node_modules/antd/lib/button/style/mixin";
+
+.logo {
+  text-align: center;
+  img {
+    max-width: 250px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 300 !important;
+    color: #8c8c8c;
+    padding: 10px;
+  }
+}
+
+.submit {
+  width: 100%;
+}
+
+.authContent {
+  margin-top: 20px;
+}
+
+.authWrapper {
+  margin-top: 15rem;
+  :global(.ant-alert) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.ant-btn.d-block) {
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+
+    svg {
+      height: 25px;
+      width: 25px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    &:global(.civic) {
+      .button-variant-primary(#fff; #3ab03f);
+      svg {
+        fill: white;
+      }
+    }
+    &:global(.auth0) {
+      .button-variant-primary(#fff; #eb5424);
+    }
+    &:global(.itsme) {
+      .button-variant-primary(#fff; #ff4611);
+    }
+  }
+  hr {
+    border: none;
+    margin: 1.5rem 0 1rem;
+    height: 1px;
+    background: #ebedf0;
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .authWrapper {
+    margin-top: 10rem;
+  }
+}
+
+@media only screen and (max-width: @screen-sm) {
+  .authWrapper {
+    margin-top: 8rem;
+  }
+}
+
+@media only screen and (max-width: @screen-xs) {
+  .authWrapper {
+    margin-top: 4rem;
+  }
+}
+

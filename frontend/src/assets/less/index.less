@@ -1,0 +1,36 @@
+@import '../../../node_modules/antd/lib/style/themes/default.less';
+@import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.css';
+@import "vars";
+
+:global {
+  #root, .height-100 {
+    min-height: 100%;
+    width: 100%;
+    height: 100%; /* NEW */
+  }
+
+  .tl_logo {
+    position: relative;
+    transition: all .3s;
+
+    h1 {
+      font-size: 20px;
+    }
+  }
+  .w-100 {
+    width: 100%;
+  }
+  .float-right {
+    float: right;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .ant-card {
+    box-shadow: 4px 10px 10px rgba(0, 0, 0, 0.01), 1px 7px 30px rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+  }
+  .ant-list-vertical .ant-list-item-meta-avatar {
+    display: block;
+  }
+}
