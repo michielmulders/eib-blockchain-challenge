@@ -75,10 +75,10 @@ class CommercialPaper extends React.Component {
     }
 
     componentDidMount() {
-        commercialPaperService.getcommercialPaper(this.props.match.params.id).then(commercialPaper => {
+        commercialPaperService.getCommercialPaper(this.props.match.params.id).then(commercialPaper => {
             const ifSeller = this.props.userId === commercialPaper.seller;
 
-            commercialPaperService.getcommercialPaperHistory(this.props.match.params.id)
+            commercialPaperService.getCommercialPaperHistory(this.props.match.params.id)
                 .then(history => {
                     return history.map(i => ({
                         value: i.value.status,
@@ -96,7 +96,7 @@ class CommercialPaper extends React.Component {
             });
 
             if (ifSeller) {
-                commercialPaperService.getcommercialPaperRequest(
+                commercialPaperService.getCommercialPaperRequest(
                     this.props.match.params.id
                 ).then(commercialPaperRequest => {
                     console.log(commercialPaperRequest[0]);

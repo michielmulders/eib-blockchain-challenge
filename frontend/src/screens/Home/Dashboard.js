@@ -16,7 +16,7 @@ class ScreensHomeDashboard extends React.Component {
     componentDidMount() {
         const userId = this.props.user.sub.replace('|', '-');
 
-        commercialPaperService.getcommercialPapers().then(invoices => {
+        commercialPaperService.getCommercialPapers().then(invoices => {
             this.setState({
                 myCommercialPapers: invoices.filter(i => i.seller === userId),
                 availableCommercialPapers: invoices.filter(i => i.buyer === userId)
