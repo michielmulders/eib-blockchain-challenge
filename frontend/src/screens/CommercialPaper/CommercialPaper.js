@@ -17,8 +17,8 @@ class CommercialPaper extends React.Component {
     state = {
         cp: {
             docType: 'cp',
-            issuer: "BANK X",
-            guarantor: "BANK Y",
+            issuer: "Citibank",
+            guarantor: "EIB",
             type: "",
             dealer: "",
             issueDate: "July 08, 2018",
@@ -31,7 +31,7 @@ class CommercialPaper extends React.Component {
             status: "OPEN",
             isin: ""
         },
-        history: {},
+        process: 0,
         columns: [
             {
                 title: 'carats',
@@ -56,26 +56,33 @@ class CommercialPaper extends React.Component {
         ]
     };
 
-    componentDidMount() {
+    handleClick = async () => {
+        if (!this.state.accepted){
 
-    }
+            this.setState({ accepted : true });
+            for (var i = 0; i < 4; i++){
+                (() => {
+                    setTimeout(this.setState({process: i}), 3000);
+                })(i);
+
+            }
+        }
+    };
 
     render() {
-
-
         return (
             <div
                 style={{ position: 'relative', width: '100%', height: '100%', paddingTop: 75 }}>
                 <Row gutter={16}>
                     <Col span={2}/>
                     <Col span={20} style={{ margin: "auto" }}>
+
                         <Header cp={this.state.cp} />
-
-
                         <div style={{ display: 'flex', alignItems: "flex-start", marginBottom: 25, justifyContent: "space-between"  }}>
-                           <Content cp={this.state.cp} />
-                           <Pricing />
+                           <Content cp={this.state.cp} process={this.state.process} />
+                           <Pricing handleClick={this.handleClick} />
                         </div>
+
                     </Col>
 
                 </Row>

@@ -51,12 +51,29 @@ export default ({ cp }) => (
             <div
                 style={{
                     marginLeft: 'auto',
+                    textAlign: 'right',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}>
+                <div style={{
                     textAlign: 'right'
                 }}>
-                <span>Guarantor</span>
-                <h5 style={{ fontSize: '1.5em' }}>
-                    {cp.guarantor}
-                </h5>
+                    <span>Guarantor</span>
+                    <h5 style={{ fontSize: '1.5em' }}>
+                        {cp.issuer}
+                    </h5>
+                </div>
+                <div style={{
+                    textAlign: 'right',
+                    marginLeft: 30,
+                    paddingLeft: 30,
+                    borderLeft: '1px solid #eee'
+                }}>
+                    <span>Issuer</span>
+                    <h5 style={{ fontSize: '1.5em' }}>
+                        {cp.guarantor}
+                    </h5>
+                </div>
             </div>
         </div>
     </div>

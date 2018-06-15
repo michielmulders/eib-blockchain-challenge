@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 
-export default ({  }) => (
+export default ({ handleClick }) => (
     <div className="pricing--container">
         <div className="pricing-container-title">Summary</div>
         <div className="pricing--container-items-wrap">
@@ -11,7 +11,7 @@ export default ({  }) => (
         </div>
         <div className="date--container-button">
 
-            <Button type="primary">ACCEPT</Button>
+            <Button onClick={handleClick} type="primary">ACCEPT</Button>
         </div>
     </div>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from 'antd';
+import { Card } from 'antd';
 
 export default ({ cp }) => (
     <div
@@ -7,7 +7,7 @@ export default ({ cp }) => (
             backgroundColor : "#fff",
         }}>
 
-        <Card className="details--rates" title={<div className="commercial-paper-title">Rates</div>} bordered={false}>
+        <Card className="details--rates" title={<div className="commercial-paper-title">Ratings</div>} bordered={false}>
 
         </Card>
     </div>
