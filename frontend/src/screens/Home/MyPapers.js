@@ -83,7 +83,7 @@ class ScreensHomeDashboard extends React.Component {
                     padding: 50
                 }}>
                 <Card
-                    title="My Commercial papers"
+                    title="My Commercial Papers"
                     bordered={false}
                     style={{
                         position: 'relative',

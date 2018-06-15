@@ -1,137 +1,117 @@
 import { Chaincode, ChaincodeError, Helpers, StubHelper } from '@theledger/fabric-chaincode-utils';
 import * as Yup from 'yup';
+const uuid = require('uuid/v4');
 
 export class MyChaincode extends Chaincode {
 
-    async queryCar(stubHelper: StubHelper, args: string[]): Promise<any> {
-
-        const verifiedArgs = await Helpers.checkArgs<{ key: string }>(args[0], Yup.object()
+    async queryCP(stubHelper: StubHelper, args: string[]): Promise<any> {
+        
+        const verifiedArgs = await Helpers.checkArgs<{ key: string }>(args, Yup.object()
             .shape({
                 key: Yup.string().required(),
             }));
 
-        const car = stubHelper.getStateAsObject(verifiedArgs.key); //get the car from chaincode state
+        const cp = stubHelper.getStateAsObject(verifiedArgs.key); //get the cp from chaincode state
 
-        if (!car) {
-            throw new ChaincodeError('Car does not exist');
+        if (!cp) {
+            throw new ChaincodeError('Commercial Paper does not exist');
         }
 
-        return car;
+        return cp;
     }
 
     async initLedger(stubHelper: StubHelper, args: string[]) {
 
-        let cars = [{
-            make: 'Toyota',
-            model: 'Prius',
-            color: 'blue',
-            owner: 'Tomoko'
-        }, {
-            make: 'Ford',
-            model: 'Mustang',
-            color: 'red',
-            owner: 'Brad'
-        }, {
-            make: 'Hyundai',
-            model: 'Tucson',
-            color: 'green',
-            owner: 'Jin Soo'
-        }, {
-            make: 'Volkswagen',
-            model: 'Passat',
-            color: 'yellow',
-            owner: 'Max'
-        }, {
-            make: 'Tesla',
-            model: 'S',
-            color: 'black',
-            owner: 'Adriana'
-        }, {
-            make: 'Peugeot',
-            model: '205',
-            color: 'purple',
-            owner: 'Michel'
-        }, {
-            make: 'Chery',
-            model: 'S22L',
-            color: 'white',
-            owner: 'Aarav'
-        }, {
-            make: 'Fiat',
-            model: 'Punto',
-            color: 'violet',
-            owner: 'Pari'
-        }, {
-            make: 'Tata',
-            model: 'Nano',
-            color: 'indigo',
-            owner: 'Valeria'
-        }, {
-            make: 'Holden',
-            model: 'Barina',
-            color: 'violet',
-            owner: 'Shotaro'
+        let cps = [{
+            issuer: 'auth0-5aeccc1e9208b8058a4aa598',
+            guarantor: 'EIB Bank',
+            type: 'Commercial Paper',
+            dealer: 'auth0-1aeccc1e9208b8058a4aa510',
+            issueDate: '15-06-2018',
+            maturityDate: '15-09-2018',
+            discount: '0.85%',
+            delivery: 'Against Payment',
+            amount: '$250,000,000',
+            rating: 'X+',
+            buyerId: '',
+            status: 'OPEN',
+            isin: '0',
         }];
 
-        for (let i = 0; i < cars.length; i++) {
-            const car: any = cars[i];
+        /* for (let i = 0; i < cps.length; i++) {
+            const cp: any = cps[i];
 
-            car.docType = 'car';
-            await stubHelper.putState('CAR' + i, car);
-            this.logger.info('Added <--> ', car);
+            cp.docType = 'cp';
+            await stubHelper.putState(uuid(), cp);
+            this.logger.info('Added <--> ', cp);
+        } */
+
+        for(let cp of cps as Array<any>) {
+            cp.docType = 'cp';
+            await stubHelper.putState(uuid(), cp);
+            this.logger.info('Added <--> ', cp);
         }
 
     }
 
-    async createCar(stubHelper: StubHelper, args: string[]) {
-        const verifiedArgs = await Helpers.checkArgs<any>(args[0], Yup.object()
+    async createCP(stubHelper: StubHelper, args: string[]) {
+        const verifiedArgs = await Helpers.checkArgs<any>(args, Yup.object()
             .shape({
-                key: Yup.string().required(),
-                make: Yup.string().required(),
-                model: Yup.string().required(),
-                color: Yup.string().required(),
-                owner: Yup.string().required(),
+                issuer: Yup.string().required(),
+                guarantor: Yup.string().required(),
+                dealer: Yup.string().required(),
+                issueDate: Yup.string().required(),
+                maturityDate: Yup.string().required(),
+                discount: Yup.string().required(),
+                amount: Yup.string().required(),
+                rating: Yup.string().required(),
             }));
 
-        let car = {
-            docType: 'car',
-            make: verifiedArgs.make,
-            model: verifiedArgs.model,
-            color: verifiedArgs.color,
-            owner: verifiedArgs.owner
+        let cp = {
+            key: uuid(),
+            docType: 'cp',
+            issuer: verifiedArgs.issuer,
+            guarantor: verifiedArgs.guarantor,
+            type: 'Commercial Paper',
+            dealer: verifiedArgs.dealer,
+            issueDate: verifiedArgs.issueDate,
+            maturityDate: verifiedArgs.maturityDate,
+            discount: verifiedArgs.discount,
+            delivery: 'Against Payment',
+            amount: verifiedArgs.amount,
+            rating: verifiedArgs.rating,
+            buyerId: '',
+            status: 'open',
+            isin: '0',
         };
 
-        await stubHelper.putState(verifiedArgs.key, car);
+        await stubHelper.putState(cp.key, cp);
     }
 
-    async queryAllCars(stubHelper: StubHelper, args: string[]): Promise<any> {
-
-        const startKey = 'CAR0';
-        const endKey = 'CAR999';
-
-        return await stubHelper.getStateByRangeAsList(startKey, endKey);
-
-    }
-
-    async richQueryAllCars(stubHelper: StubHelper, args: string[]): Promise<any> {
+    async queryAllCPs(stubHelper: StubHelper, args: string[]): Promise<any> {
 
         return await stubHelper.getQueryResultAsList({
             selector: {
-                docType: 'car'
+                docType: 'cp'
             }
         });
 
     }
 
-    async getCarHistory(stubHelper: StubHelper, args: string[]): Promise<any> {
-
-        return await stubHelper.getHistoryForKeyAsList('CAR0');
+    async queryAllOpenCPs(stubHelper: StubHelper, args: string[]): Promise<any> {
+        
+        return await stubHelper.getQueryResultAsList({
+            selector: {
+                docType: 'cp',
+                isin: '0'
+            }
+        });
 
     }
 
-    async changeCarOwner(stubHelper: StubHelper, args: string[]) {
+    /* async changeCarOwner(stubHelper: StubHelper, args: string[]) {
 
-        const verifiedArgs = await Helpers.checkArgs<{ key: string; owner: string }>(args[0], Yup.object()
+        const verifiedArgs = await Helpers.checkArgs<{ key: string; owner: string }>(args, Yup.object()
             .shape({
                 key: Yup.string().required(),
                 owner: Yup.string().required(),
@@ -142,5 +122,5 @@ export class MyChaincode extends Chaincode {
         car.owner = verifiedArgs.owner;
 
         await stubHelper.putState(verifiedArgs.key, car);
-    }
+    } */
 }

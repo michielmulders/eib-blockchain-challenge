@@ -1,4 +1,3 @@
-import { CarService } from '../routes/cars/car.service';
 import { EventsModule } from './events.module';
 import { ChainModule } from './chain.module';
 import { QueueModule } from './queue.module';
@@ -8,7 +7,6 @@ import { PingController } from '../routes/ping/ping.controller';
 import { HlfClient } from '../services/chain/hlfclient';
 import { QueueListenerService } from '../services/queue/queuelistener.service';
 import { NestModule } from '@nestjs/common/interfaces';
-import { CarController } from '../routes/cars/car.controller';
 import { Log } from '../services/logging/log.service';
 import { HlfCaClient } from '../services/chain/hlfcaclient';
 import { AuthenticationModule } from './authentication.module';
@@ -17,15 +15,17 @@ import { HlfErrors } from '../services/chain/logging.enum';
 import { Appconfig } from '../common/config/appconfig';
 import { JwtauthenticationMiddleware } from '../common/middleware/jwtauthentication.middleware';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { CpService } from '../routes/cps/cp.service';
+import { CpController } from '../routes/cps/cp.controller';
 
 @Module({
     controllers: [
         PingController,
-        CarController,
+        CpController,
     ],
     providers: [
         PingService,
-        CarService,
+        CpService,
     ],
     imports: [
         ChainModule,

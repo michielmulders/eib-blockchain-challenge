@@ -36,7 +36,7 @@ class UISidebar extends React.Component {
                               <Menu.Item key="/mypapers">
                                   <Link to="/mypapers" onClick={this.collapse}>
                                       <Icon type="file-text" />
-                                      <span>My commercial papers</span>
+                                      <span>My Commercial Papers</span>
                                   </Link>
                               </Menu.Item>,
                               <Menu.Item key="/">
