@@ -38,14 +38,19 @@ class UISidebar extends React.Component {
                     {role === 'user'
                         ? [
 
-                              <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-                                  <Menu.Item key="/">
-                                      <Link to="/" onClick={this.collapse}>
-                                          <Icon type="file-text" />
-                                          <span>My commercial papers</span>
-                                      </Link>
-                                  </Menu.Item>
-                              </SubMenu>
+                            <Menu.Item key="/mypapers">
+                                <Link to="/mypapers" onClick={this.collapse}>
+                                    <Icon type="file-text" />
+                                    <span>My commercial papers</span>
+                                </Link>
+                            </Menu.Item>
+                            ,
+                            <Menu.Item key="/">
+                                <Link to="/" onClick={this.collapse}>
+                                    <Icon type="file-text" />
+                                    <span>Available papers</span>
+                                </Link>
+                            </Menu.Item>
 
                           ]
                         : [

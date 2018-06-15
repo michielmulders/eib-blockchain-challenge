@@ -14,8 +14,8 @@ export default ({ cp, process }) => (
             </div>
         </Card>
 
-    <Swift cp={cp} process={process} />
-    <Details cp={cp} />
+        <Swift cp={cp} process={process} />
+        <Details cp={cp} />
     </div>
 );
 

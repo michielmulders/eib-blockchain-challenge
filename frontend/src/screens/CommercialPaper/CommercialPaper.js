@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    Button,
-    Card,
-    Col, Icon,
-    Row,
-    Tag
+    Col,
+    Row
 } from 'antd';
 import './CommercialPaper.module.less';
 import { push } from 'react-router-redux';
@@ -84,7 +81,6 @@ class CommercialPaper extends React.Component {
                         </div>
 
                     </Col>
-
                 </Row>
             </div>
         );

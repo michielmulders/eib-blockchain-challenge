@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './Home/Dashboard';
+import MyPapers from './Home/MyPapers';
 import { Layout } from 'antd';
 import { Switch } from 'react-router';
 import UIHeader from '../components/UI/Header/Header';
@@ -35,7 +36,7 @@ class Root extends React.Component {
         });
     }
 
-    onMenuClick = ({ item, key, keyPath }) => {
+    onMenuClick = ({ item, key }) => {
         switch (key) {
             case 'logout':
                 this.props.logout();
@@ -50,6 +51,7 @@ class Root extends React.Component {
             return (
                 <Switch style={{ width: '100%', height: '100%' }}>
                     <AuthPrivateRoute exact path="/" component={Home} />
+                    <AuthPrivateRoute exact path="/mypapers" component={MyPapers} />
                     <AuthPrivateRoute
                         exact
                         path="/commercialpapers/:id"

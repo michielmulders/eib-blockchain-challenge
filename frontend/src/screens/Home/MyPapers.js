@@ -31,9 +31,9 @@ class ScreensHomeDashboard extends React.Component {
     dealer: "",
     issueDate: "July 08, 2018",
     maturityDate: "December 08, 2018",
-    discount: "0,85",
+    discount: "0,55",
     delivery: "",
-    amount: "25,000,000",
+    amount: "250,000",
     rating: "",
     buyerId: "",
     status: "OPEN",
@@ -47,9 +47,9 @@ class ScreensHomeDashboard extends React.Component {
             dealer: "",
             issueDate: "July 08, 2018",
             maturityDate: "December 08, 2018",
-            discount: "0,85",
+            discount: "0,5",
             delivery: "",
-            amount: "7,500,000",
+            amount: "500,000",
             rating: "",
             buyerId: "",
             status: "OPEN",
@@ -66,7 +66,7 @@ class ScreensHomeDashboard extends React.Component {
                     padding: 50
                 }}>
                 <Card
-                    title="Available Papers"
+                    title="My Commercial papers"
 
                     bordered={false}
                     style={{
