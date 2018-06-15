@@ -8,6 +8,7 @@ import Root from './screens/Root';
 import './assets/less/index.less';
 import { Route, Switch } from 'react-router';
 import ScreensAuth from './screens/Auth/Auth';
+import ScreensInvestorBiddingMarket from './screens/CommercialPaper/CommercialPaper';
 import { handleCallback, init, logout } from './shared/auth/authActions';
 import { Spin } from 'antd';
 import NoPrivateRoute from './components/Auth/NoPrivateRoute';
@@ -21,6 +22,10 @@ render(
             <div className="height-100">
                 <Switch>
                     <NoPrivateRoute path="/login" component={ScreensAuth} />
+                    <NoPrivateRoute
+                        path="/bidding"
+                        component={ScreensInvestorBiddingMarket}
+                    />
 
                     <Route
                         path="/callback"
