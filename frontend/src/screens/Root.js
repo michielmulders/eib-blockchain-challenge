@@ -73,6 +73,11 @@ class Root extends React.Component {
                     path="/bidding"
                     component={BiddingMarket}
                 />
+                <AuthPrivateRoute
+                    exact
+                    path="/commercialpapers/:id"
+                    component={CommercialPaper}
+                />
             </Switch>
         );
     };

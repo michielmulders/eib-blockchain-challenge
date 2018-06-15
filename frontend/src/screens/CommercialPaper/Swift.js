@@ -4,7 +4,6 @@ import { Card, Steps } from 'antd';
 const Step = Steps.Step;
 
 export default ({ process }) => {
-    console.log(process);
     return (
         <div
             style={{

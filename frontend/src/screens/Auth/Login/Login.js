@@ -31,20 +31,12 @@ class ScreensAuthLogin extends React.PureComponent {
                             loading={loading}
                             size="large"
                             type="primary"
-                            onClick={login.bind(null, 'itsme')}
+                            onClick={login.bind(null, 'auth0')}
                             className="d-block"
                             htmlType="submit">
                             Login as Bank
                         </Button>
-                        <Button
-                            loading={loading}
-                            size="large"
-                            type="primary"
-                            onClick={login.bind(null, 'itsme')}
-                            className="d-block"
-                            htmlType="submit">
-                            Login as Dealer
-                        </Button>
+
                     </div>
                 )}
                 <hr />

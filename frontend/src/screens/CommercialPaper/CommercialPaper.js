@@ -53,15 +53,16 @@ class CommercialPaper extends React.Component {
         ]
     };
 
-    handleClick = async () => {
+    doSetTimeout(i, ctx) {
+        setTimeout(() => { ctx.setState({process: i}) }, i * 3000);
+    }
+
+    handleClick =  () => {
         if (!this.state.accepted){
-
             this.setState({ accepted : true });
-            for (var i = 0; i < 4; i++){
-                (() => {
-                    setTimeout(this.setState({process: i}), 3000);
-                })(i);
 
+            for (var i = 0; i < 4; ++i){
+               this.doSetTimeout(i, this);
             }
         }
     };
