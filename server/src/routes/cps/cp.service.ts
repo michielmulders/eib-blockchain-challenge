@@ -39,6 +39,18 @@ export class CpService {
         });
     }
 
+    /**
+     * Get all open cps
+     *
+     * @returns {Promise<CpDto[]>}
+     * @memberof CpService
+     */
+    buyCp(authId): Promise<CpDto>{
+        return this.requestHelper.queryRequest(ChainMethod.queryAllOpenCPs, {authId}).catch((error) => {
+            throw new InternalServerErrorException(error);
+        });
+    }
+
     // /**
     //  * Get cp by id
     //  *

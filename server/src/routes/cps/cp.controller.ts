@@ -58,6 +58,25 @@ export class CpController {
         return this.cpService.getAllOpen();
     }
 
+    /**
+     * Create new Cp
+     *
+     * @param {CpDto} cpDto
+     * @param req
+     * @returns {*}
+     * @memberof CpController
+     */
+    @Post()
+    @ApiOperation({title: 'Create new Cp'})
+    @ApiResponse({
+        status: 201,
+        description: 'The record has been successfully created.',
+    })
+    @ApiOAuth2Auth(['write'])
+    create(@Body() cpDto: CpDto, @Req() req): Promise<InvokeResult> {
+        return this.cpService.create(cpDto, req.auth);
+    }
+
     // /**
     //  * Get Cp by id
     //  *
@@ -80,25 +99,6 @@ export class CpController {
     // })
     // getById(@Param('id') id: string): Promise<CpDto> {
     //     return this.cpService.getById(id);
-    // }
-
-    // /**
-    //  * Create new Cp
-    //  *
-    //  * @param {CpDto} cpDto
-    //  * @param req
-    //  * @returns {*}
-    //  * @memberof CpController
-    //  */
-    // @Post()
-    // @ApiOperation({title: 'Create new Cp'})
-    // @ApiResponse({
-    //     status: 201,
-    //     description: 'The record has been successfully created.',
-    // })
-    // @ApiOAuth2Auth(['write'])
-    // create(@Body() cpDto: CpDto, @Req() req): Promise<InvokeResult> {
-    //     return this.cpService.create(cpDto, req.auth);
     // }
 
 }
