@@ -24,25 +24,13 @@ class ScreensAuthLogin extends React.PureComponent {
                             type="primary"
                             className="d-block itsme"
                             onClick={login.bind(null, 'auth0')}
-                            htmlType="submit">
-
-                            Login as buyer
-                        </Button>
-                        <Button
-                            loading={loading}
-                            size="large"
-                            type="primary"
-                            onClick={login.bind(null, 'civic')}
-                            className="d-block itsme"
-                            htmlType="submit">
-                            Login as ISCD
-                        </Button>
+                            htmlType="submit">login as buyer</Button>
                         <Button
                             loading={loading}
                             size="large"
                             type="primary"
                             onClick={login.bind(null, 'itsme')}
-                            className="d-block itsme"
+                            className="d-block"
                             htmlType="submit">
                             Login as Bank
                         </Button>
@@ -51,7 +39,7 @@ class ScreensAuthLogin extends React.PureComponent {
                             size="large"
                             type="primary"
                             onClick={login.bind(null, 'itsme')}
-                            className="d-block itsme"
+                            className="d-block"
                             htmlType="submit">
                             Login as Dealer
                         </Button>
