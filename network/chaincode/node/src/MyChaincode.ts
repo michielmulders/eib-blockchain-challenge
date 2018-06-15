@@ -36,6 +36,21 @@ export class MyChaincode extends Chaincode {
             buyerId: '',
             status: 'OPEN',
             isin: '0',
+        },
+        {
+            issuer: 'auth0-5aeccc1e920miqmsqfij902S',
+            guarantor: 'EIB Bank',
+            type: 'Commercial Paper',
+            dealer: 'auth0-1aeccc1e9208b8058a4aa510',
+            issueDate: '21-08-2018',
+            maturityDate: '21-12-2018',
+            discount: '0.81%',
+            delivery: 'Against Payment',
+            amount: '$500,000,000',
+            rating: 'X-',
+            buyerId: '',
+            status: 'OPEN',
+            isin: '0',
         }];
 
         /* for (let i = 0; i < cps.length; i++) {
