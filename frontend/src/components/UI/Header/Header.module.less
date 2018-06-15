@@ -18,9 +18,12 @@
 
 .header {
   height: 64px;
-  padding: 0 12px 0 0;
-  position: relative;
-  background: transparent;
+  width: 100%;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: right;
 }
 
 .trigger {
@@ -36,15 +39,25 @@
   }
 }
 
+.search {
+  margin-left: auto;
+}
+
+
 .right {
-  float: right;
+  margin-left: auto;
   height: 100%;
+  background-color: @primary-color;
+  padding-left: 15px;
+  padding-right: 15px;
+
   .action {
     cursor: pointer;
-    padding: 0 12px;
+    padding: 0 10px;
     display: inline-block;
     transition: all .3s;
     height: 100%;
+    color: #ccc;
     > i {
       font-size: 16px;
       vertical-align: middle;
@@ -56,15 +69,14 @@
   }
   .search {
     padding: 0;
-    margin: 0 12px;
     &:hover {
       background: transparent;
     }
   }
   .account {
     .avatar {
-      margin: 20px 8px 20px 0;
-      color: @primary-color;
+      margin-right: 10px;
+      color: #fff;
       background: rgba(255, 255, 255, .85);
       vertical-align: middle;
     }

@@ -8,14 +8,11 @@ import logo from '../../../assets/images/logo.png';
 import eib_logo from '../../../assets/images/eib.png';
 import { withRouter } from 'react-router';
 
+const { SubMenu } = Menu;
+
 const { Sider } = Layout;
 
 class UISidebar extends React.Component {
-    collapse = () => {
-        if (this.props.isMobile) {
-            this.props.toggleCollapse(true);
-        }
-    };
 
     render() {
         const { location, user } = this.props;
@@ -25,7 +22,7 @@ class UISidebar extends React.Component {
         return (
             <Sider
                 className={styles.sidebar}
-                width={256}
+                width={356}
                 breakpoint="lg">
                 <div className={cn('tl_logo', styles.sidebar_logo)}>
                     <img src={logo} alt="barn logo" />
@@ -40,12 +37,15 @@ class UISidebar extends React.Component {
                     selectedKeys={[location.pathname]}>
                     {role === 'user'
                         ? [
-                              <Menu.Item key="/">
-                                  <Link to="/" onClick={this.collapse}>
-                                      <Icon type="file-text" />
-                                      <span>Commercial papers</span>
-                                  </Link>
-                              </Menu.Item>
+
+                              <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
+                                  <Menu.Item key="/">
+                                      <Link to="/" onClick={this.collapse}>
+                                          <Icon type="file-text" />
+                                          <span>My commercial papers</span>
+                                      </Link>
+                                  </Menu.Item>
+                              </SubMenu>
 
                           ]
                         : [
@@ -53,7 +53,7 @@ class UISidebar extends React.Component {
                                   <Link to="/" onClick={this.collapse}>
                                       <Icon type="dashboard" />
                                       <span>Investment overview</span>
-                                  </Link>¬
+                                  </Link>
                               </Menu.Item>,
                               <Menu.Item key="/bidding">
                                   <Link to="/bidding" onClick={this.collapse}>
@@ -71,8 +71,7 @@ class UISidebar extends React.Component {
 UISidebar.propTypes = {
     collapsed: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
-    isMobile: PropTypes.bool,
-    toggleCollapse: PropTypes.func.isRequired
+    isMobile: PropTypes.bool
 };
 
 export default withRouter(UISidebar);

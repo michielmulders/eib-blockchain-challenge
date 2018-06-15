@@ -12,6 +12,8 @@ import BiddingMarket from './investor/BiddingMarket';
 import CommercialPaper from './CommercialPaper/CommercialPaper';
 import InvestmentOverview from './investor/InvestmentOverview';
 
+import "./index.module.less";
+
 const { Content } = Layout;
 
 let isMobile;
@@ -32,12 +34,6 @@ class Root extends React.Component {
             });
         });
     }
-
-    toggle = collapse => {
-        this.setState({
-            collapsed: collapse || !this.state.collapsed
-        });
-    };
 
     onMenuClick = ({ item, key, keyPath }) => {
         switch (key) {

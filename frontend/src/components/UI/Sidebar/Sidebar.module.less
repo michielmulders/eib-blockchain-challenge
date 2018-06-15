@@ -11,25 +11,16 @@
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 70%;
 
   img {
     display: inline-block;
     vertical-align: middle;
     height: 40px;
+    margin-right: 15px;
   }
-
-  h1 {
-    color: #070707;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 20px;
-    margin: 0 0 0 12px;
-    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 600;
-  }
-
 }
+
 
 .menu {
   padding: 16px 0px;
@@ -50,15 +41,13 @@
 
 .sidebar {
   background: white;
+  border-right: 1px solid #efefef;
+
   &:global(.ant-layout-sider-collapsed) {
     .sidebar_logo {
       line-height: 128px;
       height: 128px;
       padding-left: 14px;
-
-      h1 {
-        display: none;
-      }
 
       img {
         height: 50px;
