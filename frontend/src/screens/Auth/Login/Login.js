@@ -24,7 +24,9 @@ class ScreensAuthLogin extends React.PureComponent {
                             type="primary"
                             className="d-block itsme"
                             onClick={login.bind(null, 'auth0')}
-                            htmlType="submit">login as buyer</Button>
+                            htmlType="submit">
+                            Login as Buyer
+                        </Button>
                         <Button
                             loading={loading}
                             size="large"
@@ -46,7 +48,7 @@ class ScreensAuthLogin extends React.PureComponent {
                     </div>
                 )}
                 <hr />
-                Build number: v0.0.1
+                Build number: v0.5.12
             </div>
         );
     }

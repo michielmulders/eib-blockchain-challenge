@@ -13,17 +13,13 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 class UISidebar extends React.Component {
-
     render() {
         const { location, user } = this.props;
 
         const role = user['https://theledger.be/role'];
 
         return (
-            <Sider
-                className={styles.sidebar}
-                width={356}
-                breakpoint="lg">
+            <Sider className={styles.sidebar} width={356} breakpoint="lg">
                 <div className={cn('tl_logo', styles.sidebar_logo)}>
                     <img src={logo} alt="barn logo" />
                     <div>by</div>
@@ -37,21 +33,18 @@ class UISidebar extends React.Component {
                     selectedKeys={[location.pathname]}>
                     {role === 'user'
                         ? [
-
-                            <Menu.Item key="/mypapers">
-                                <Link to="/mypapers" onClick={this.collapse}>
-                                    <Icon type="file-text" />
-                                    <span>My commercial papers</span>
-                                </Link>
-                            </Menu.Item>
-                            ,
-                            <Menu.Item key="/">
-                                <Link to="/" onClick={this.collapse}>
-                                    <Icon type="file-text" />
-                                    <span>Available papers</span>
-                                </Link>
-                            </Menu.Item>
-
+                              <Menu.Item key="/mypapers">
+                                  <Link to="/mypapers" onClick={this.collapse}>
+                                      <Icon type="file-text" />
+                                      <span>My commercial papers</span>
+                                  </Link>
+                              </Menu.Item>,
+                              <Menu.Item key="/">
+                                  <Link to="/" onClick={this.collapse}>
+                                      <Icon type="file-text" />
+                                      <span>Marketplace</span>
+                                  </Link>
+                              </Menu.Item>
                           ]
                         : [
                               <Menu.Item key="/">
