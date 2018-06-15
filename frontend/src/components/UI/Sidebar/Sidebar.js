@@ -8,7 +8,6 @@ import logo from '../../../assets/images/logo.png';
 import eib_logo from '../../../assets/images/eib.png';
 import { withRouter } from 'react-router';
 
-const { SubMenu } = Menu;
 
 const { Sider } = Layout;
 
@@ -50,13 +49,7 @@ class UISidebar extends React.Component {
                               <Menu.Item key="/">
                                   <Link to="/" onClick={this.collapse}>
                                       <Icon type="dashboard" />
-                                      <span>Investment overview</span>
-                                  </Link>
-                              </Menu.Item>,
-                              <Menu.Item key="/bidding">
-                                  <Link to="/bidding" onClick={this.collapse}>
-                                      <Icon type="global" />
-                                      <span>Bidding market</span>
+                                      <span>My Assets</span>
                                   </Link>
                               </Menu.Item>
                           ]}
