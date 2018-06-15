@@ -6,7 +6,6 @@ import ChartCard from '../../shared/Charts/ChartCard/ChartCard';
 import Trend from '../../shared/Charts/Trend/Trend';
 import MiniProgress from '../../shared/Charts/MiniProgress/MiniProgress';
 import MiniArea from '../../shared/Charts/MiniArea';
-import FinanceRequestService from '../../shared/services/api/financeRequest';
 
 class ScreensInvestorInvestmentOverview extends React.Component {
     state = {
@@ -14,14 +13,8 @@ class ScreensInvestorInvestmentOverview extends React.Component {
     };
 
     componentDidMount() {
-        FinanceRequestService.getMyAcceptedFinanceRequests().then(
-            financerequets => {
-                this.setState({
-                    investments: financerequets
-                });
-            }
-        );
     }
+
 
     render() {
         return (

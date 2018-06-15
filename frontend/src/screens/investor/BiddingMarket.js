@@ -12,7 +12,6 @@ import {
     Tag
 } from 'antd';
 import './BiddingMarket.module.less';
-import FinanceRequestService from '../../shared/services/api/financeRequest';
 import { connect } from 'react-redux';
 
 class ScreensInvestorBiddingMarket extends React.Component {
@@ -22,30 +21,43 @@ class ScreensInvestorBiddingMarket extends React.Component {
         bidAmount: 5
     };
 
-    componentDidMount() {
-        FinanceRequestService.getFinanceRequests().then(financeRequests => {
-            this.setState({
-                financeRequests
-            });
-        });
-    }
+    commercialPapers = [
+        {
+            docType: 'cp',
+            issuer: 'BANK XXXXXXX',
+            guarantor: 'BANK YYYYYYYY',
+            type: '',
+            dealer: '',
+            issueDate: '2018-06-08',
+            maturityDate: '2018-12-08',
+            discount: '',
+            delivery: '',
+            amount: '',
+            rating: '',
+            buyerId: '',
+            status: 'OPEN',
+            isin: '1'
+        }
+    ];
+
+    componentDidMount() {}
 
     render() {
         return (
             <div>
-                <h2>Projects in need of financing</h2>
+                <h2>Commercial Papers</h2>
                 <Row gutter={24}>
                     <Col span={16}>
                         <List
                             itemLayout="vertical"
                             size="large"
-                            dataSource={this.state.financeRequests}
+                            dataSource={this.state.commercialPapers}
                             renderItem={item => (
                                 <Card
                                     bodyStyle={{ padding: '10px 24px' }}
                                     style={{ marginBottom: '20px' }}>
                                     <List.Item
-                                        key={item.invoiceId}
+                                        key={item.isin}
                                         extra={
                                             <div>
                                                 <span
@@ -128,45 +140,6 @@ class ScreensInvestorBiddingMarket extends React.Component {
                                                     0
                                                 );
                                                 // Dismiss manually and asynchronously
-
-                                                FinanceRequestService.bidOnFinanceRequest(
-                                                    this.state.invoiceRequest
-                                                        .financeRequestId,
-                                                    this.state.bidAmount
-                                                ).then(({ txHash }) => {
-                                                    this.setState({
-                                                        financeRequests: [
-                                                            ...this.state.financeRequests.map(
-                                                                item => {
-                                                                    if (
-                                                                        item.financeRequestId ===
-                                                                        this
-                                                                            .state
-                                                                            .invoiceRequest
-                                                                            .financeRequestId
-                                                                    ) {
-                                                                        item.bids = [
-                                                                            {
-                                                                                amount: this
-                                                                                    .state
-                                                                                    .bidAmount
-                                                                            },
-                                                                            ...item.bids
-                                                                        ];
-                                                                    }
-                                                                    return item;
-                                                                }
-                                                            )
-                                                        ]
-                                                    });
-
-                                                    hide();
-
-                                                    message.success(
-                                                        'Succesful bid: ' +
-                                                            txHash
-                                                    );
-                                                });
                                             }}>
                                             Place bid
                                         </Button>
@@ -202,5 +175,9 @@ class ScreensInvestorBiddingMarket extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    commercialPapers: state.commercialPapers
+});
 
 export default connect()(ScreensInvestorBiddingMarket);

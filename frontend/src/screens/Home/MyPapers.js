@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Button, Card, List, Table, Tag } from 'antd';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import './Dashboard.module.less';
 
 const columns = [
     {
@@ -30,7 +29,7 @@ const columns = [
                 <Link
                     style={{ marginLeft: 'auto' }}
                     to={'/commercialpapers/' + record.id}>
-                    View Details
+                    Open
                 </Link>
             );
         }
@@ -46,11 +45,11 @@ class ScreensHomeDashboard extends React.Component {
                 guarantor: 'EIB',
                 type: '',
                 dealer: '',
-                issueDate: 'July 08, 2018',
-                maturityDate: 'December 08, 2018',
-                discount: '0,85',
+                issueDate: 'June 25, 2018',
+                maturityDate: 'August 25, 2018',
+                discount: '0,67',
                 delivery: '',
-                amount: '25,000,000',
+                amount: '$250,000',
                 rating: '',
                 buyerId: '',
                 status: 'OPEN',
@@ -63,11 +62,11 @@ class ScreensHomeDashboard extends React.Component {
                 guarantor: 'EIB',
                 type: '',
                 dealer: '',
-                issueDate: 'June 21, 2018',
-                maturityDate: 'December 21, 2018',
-                discount: '0,89',
+                issueDate: 'July 08, 2018',
+                maturityDate: 'December 08, 2018',
+                discount: '0,74',
                 delivery: '',
-                amount: '7,500,000',
+                amount: '$500,000',
                 rating: '',
                 buyerId: '',
                 status: 'OPEN',
@@ -84,7 +83,7 @@ class ScreensHomeDashboard extends React.Component {
                     padding: 50
                 }}>
                 <Card
-                    title="Marketplace"
+                    title="My Commercial Papers"
                     bordered={false}
                     style={{
                         position: 'relative',

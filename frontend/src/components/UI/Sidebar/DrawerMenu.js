@@ -11,13 +11,10 @@ const UISidebarDrawerMenu = props =>
             level={null}
             iconChild={null}
             open={!props.collapsed}
-            onMaskClick={() => {
-                props.toggleCollapse(true);
-            }}
             width="256px">
             <Sidebar
                 {...props}
-                collapsed={props.isMobile ? false : props.collapsed}
+                collapsed={props.isMobile ? false : true}
             />
         </DrawerMenu>
     ) : (
@@ -26,8 +23,7 @@ const UISidebarDrawerMenu = props =>
 
 UISidebarDrawerMenu.propTypes = {
     collapsed: PropTypes.bool.isRequired,
-    isMobile: PropTypes.bool,
-    toggleCollapse: PropTypes.func.isRequired
+    isMobile: PropTypes.bool
 };
 
 export default UISidebarDrawerMenu;

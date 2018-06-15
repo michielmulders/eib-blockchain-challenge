@@ -22,35 +22,33 @@ class ScreensAuthLogin extends React.PureComponent {
                             loading={loading}
                             size="large"
                             type="primary"
-                            className="d-block auth0"
+                            className="d-block itsme"
                             onClick={login.bind(null, 'auth0')}
                             htmlType="submit">
-                            <Logo_auth0 />
-                            Login with Auth0
-                        </Button>
-                        <Button
-                            loading={loading}
-                            size="large"
-                            type="primary"
-                            onClick={login.bind(null, 'civic')}
-                            className="d-block civic"
-                            htmlType="submit">
-                            <Logo_civic />
-                            Login with Civic
+                            Login as Buyer
                         </Button>
                         <Button
                             loading={loading}
                             size="large"
                             type="primary"
                             onClick={login.bind(null, 'itsme')}
-                            className="d-block itsme"
+                            className="d-block"
                             htmlType="submit">
-                            Login with Itsme
+                            Login as Bank
+                        </Button>
+                        <Button
+                            loading={loading}
+                            size="large"
+                            type="primary"
+                            onClick={login.bind(null, 'itsme')}
+                            className="d-block"
+                            htmlType="submit">
+                            Login as Dealer
                         </Button>
                     </div>
                 )}
                 <hr />
-                Build number: v0.0.1
+                Build number: v0.5.12
             </div>
         );
     }

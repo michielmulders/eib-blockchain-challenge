@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './Home/Dashboard';
+import MyPapers from './Home/MyPapers';
 import { Layout } from 'antd';
 import { Switch } from 'react-router';
 import UIHeader from '../components/UI/Header/Header';
@@ -9,9 +10,10 @@ import AuthPrivateRoute from '../components/Auth/PrivateRoute';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import BiddingMarket from './investor/BiddingMarket';
-import InvoiceOverview from './CreateInvoice/Create';
-import Invoice from './Invoice/Invoice';
+import CommercialPaper from './CommercialPaper/CommercialPaper';
 import InvestmentOverview from './investor/InvestmentOverview';
+
+import "./index.module.less";
 
 const { Content } = Layout;
 
@@ -34,13 +36,7 @@ class Root extends React.Component {
         });
     }
 
-    toggle = collapse => {
-        this.setState({
-            collapsed: collapse || !this.state.collapsed
-        });
-    };
-
-    onMenuClick = ({ item, key, keyPath }) => {
+    onMenuClick = ({ item, key }) => {
         switch (key) {
             case 'logout':
                 this.props.logout();
@@ -55,15 +51,11 @@ class Root extends React.Component {
             return (
                 <Switch style={{ width: '100%', height: '100%' }}>
                     <AuthPrivateRoute exact path="/" component={Home} />
+                    <AuthPrivateRoute exact path="/mypapers" component={MyPapers} />
                     <AuthPrivateRoute
                         exact
-                        path="/create-invoice"
-                        component={InvoiceOverview}
-                    />
-                    <AuthPrivateRoute
-                        exact
-                        path="/invoice/:id"
-                        component={Invoice}
+                        path="/commercialpapers/:id"
+                        component={CommercialPaper}
                     />
                 </Switch>
             );

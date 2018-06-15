@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import logo from '../../assets/images/diamond.svg';
+import logo from '../../assets/images/logo.png';
 import cn from 'classnames';
 import styles from '../../components/Auth/Auth.module.less';
 import { Switch } from 'react-router';
@@ -17,7 +17,6 @@ const Auth = ({ children }) => (
             className={styles.authWrapper}>
             <div className={cn('tl_logo', styles.logo)}>
                 <img src={logo} alt="barn logo" />
-                <h1>DiaVest</h1>
             </div>
             <div className={styles.authContent}>
                 <Switch>{children}</Switch>
